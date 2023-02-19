@@ -6,10 +6,13 @@ console.log(localStorage.getItem('cartItems'));
 const initialState = {
   cart: {
     cartItems:
-      // localStorage.getItem('cartItems')
-      //   ? JSON.parse(localStorage.getItem('cartItems'))
-      //   :
-      [],
+      localStorage.getItem('cartItems') &&
+      Boolean(
+        JSON.parse(localStorage.getItem('cartItems')) &&
+          Object.keys(JSON.parse(localStorage.getItem('cartItems'))).length > 0
+      )
+        ? JSON.parse(localStorage.getItem('cartItems'))
+        : [],
   },
 };
 function reducer(state, action) {
