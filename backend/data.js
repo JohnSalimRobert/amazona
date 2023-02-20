@@ -1,7 +1,16 @@
 const data = {
+  users: [
+    {
+      name: 'John',
+      email: 'user@example.com',
+      password: 12234,
+      isAdmin: true,
+    },
+  ],
+
   products: [
     {
-      _id: '1',
+      // _id: '1',
       name: 'Nike Slim shirt',
       slug: 'nike-slim-shirt',
       category: 'Shirts',
@@ -14,7 +23,7 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '2',
+      //_id: '2',
       name: 'Adidas Fit shirt',
       slug: 'Adidas-Fit-shirt',
       category: 'Shirts',
@@ -27,7 +36,7 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '3',
+      // _id: '3',
       name: 'Nike Slim Pant',
       slug: 'nike-slim-Pant',
       category: 'Pants',
@@ -40,7 +49,7 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '4',
+      //  _id: '4',
       name: 'Adidas Fit Pants',
       slug: 'Adidas-Fit-Pants',
       category: 'Pants',
@@ -53,7 +62,7 @@ const data = {
       description: 'high quality product',
     },
     {
-      _id: '5',
+      // _id: '5',
       name: 'iPhone 14 Pro Max',
       slug: 'iPhone-14-Pro-Max',
       category: 'Mobile Phone',
@@ -66,8 +75,8 @@ const data = {
       description: '5G network ',
     },
     {
-      _id: '6',
-      name: 'Galaxy s22 Ultra',  
+      // _id: '6',
+      name: 'Galaxy s22 Ultra',
       slug: 'galaxy-s22-ultra',
       category: 'Mobile Phone',
       image: '/images/p6.jpg',
