@@ -12,9 +12,12 @@ import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 import CartScreen from "./screens/CartScreen";
 import SigninScreen from "./screens/SigninScreen";
-import {ToastContainer} from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import SignupScreen from "./screens/SignupScreen";
+import PaymentMethodScreen from "./screens/PaymentMethodScreen";
+import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 
 function App() {
   const { state, dispatch: ctxDispatch } = useContext(Store);
@@ -22,15 +25,16 @@ function App() {
 
   const signoutHandler = () => {
     ctxDispatch({ type: "USER_SIGNOUT" });
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('shippingAddress');
+    localStorage.removeItem("userInfo");
+    localStorage.removeItem("shippingAddress");
+    localStorage.removeItem("paymentMethod");
   };
   console.log(userInfo);
 
   return (
     <BrowserRouter>
       <div className="d-flex flex-column site-container">
-        <ToastContainer position='bottom-center' limit={1} />
+        <ToastContainer position="bottom-center" limit={1} />
         <header>
           {/*To change Navbar colors */}
           <Navbar bg="dark" variant="dark">
@@ -80,7 +84,10 @@ function App() {
             <Routes>
               <Route path="/product/:slug" element={<ProductScreen />} />
               <Route path="/signin" element={<SigninScreen />} />
-              <Route path="/shipping" element={<ShippingAddressScreen/>} />
+              <Route path="/signup" element={<SignupScreen />} />
+              <Route path="/payment" element={<PaymentMethodScreen />} />
+              <Route path="/shipping" element={<ShippingAddressScreen />} />
+              <Route path="/placeorder" element={<PlaceOrderScreen />} />
               <Route path="/cart" element={<CartScreen />} />
               <Route path="/" element={<HomeScreen />} />
             </Routes>

@@ -20,11 +20,11 @@ export default function ShippingAddressScreen() {
   const [postalCode, setPostalCode] = useState(
     shippingAddress.postalCode || ""
   );
-  useEffect(()=>{
-    if(!userInfo){
-        navigate('/signin?redirect=/shipping')
+  useEffect(() => {
+    if (!userInfo) {
+      navigate("/signin?redirect=/shipping");
     }
-  }, [userInfo, navigate])
+  }, [userInfo, navigate]);
   const [country, setCountry] = useState(shippingAddress.country || "");
 
   const submitHandler = (e) => {
