@@ -8,7 +8,7 @@ import userRouter from "./routes/userRoutes.js";
 dotenv.config();
 
 mongoose
-  .connect(process.env.MONGODB_URI)
+  .connect("mongodb://127.0.0.1:27017/bloom")
   .then(() => {
     console.log("connected to DB");
   })

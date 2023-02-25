@@ -1,6 +1,6 @@
 function Rating(props) {
   const { rating, numReviews } = props;
-  console.log(numReviews);
+  
   return (
     <div className="rating">
       <span>
