@@ -1,5 +1,5 @@
 import express from "express";
-import generateToken from "../utils.js";
+import generateToken, { isAuth } from "../utils.js";
 import expressAsyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 
@@ -45,4 +45,25 @@ userRouter.post(
   
 );
 
+userRouter.put('/profile', isAuth, expressAsyncHandler(async(req, res)=>{
+  console.log(req.user._id);
+  const user = await User.findById(req.user._id);
+  if(user){
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.password = req.body.password || user.password;
+
+    const updatedUser = await user.save();
+    res.send({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      isAdmin: updatedUser.isAdmin,
+      token: generateToken(updatedUser),
+      
+    })
+  } else {
+    res.status(404).send({message: 'User not found'})
+  }
+}))
 export default userRouter;

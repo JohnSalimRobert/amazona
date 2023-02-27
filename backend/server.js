@@ -5,10 +5,12 @@ import dotenv from "dotenv";
 import seedRouter from "./routes/seedRoutes.js";
 import productRouter from "./routes/productRoutes.js";
 import userRouter from "./routes/userRoutes.js";
+import orderRouter from "./routes/orderRoutes.js";
+
 dotenv.config();
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/bloom")
+  .connect("mongodb+srv://Bloom:Bloom123@cluster0.cayklrm.mongodb.net/?retryWrites=true&w=majority")
   .then(() => {
     console.log("connected to DB");
   })
@@ -21,9 +23,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.get('/api/keys/easypaisa', (req, res) =>{
+  res.send(process.env.EASYPAISA_CLIENT_ID || 'sb')
+})
+
 app.use("/api/seed", seedRouter);
 app.use("/api/products", productRouter);
 app.use("/api/users", userRouter);
+app.use("/api/orders", orderRouter);
 
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
