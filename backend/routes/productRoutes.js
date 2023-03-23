@@ -12,6 +12,7 @@ const PAGE_SIZE = 3;
 productRouter.get(
   "/search",
   expressAsyncHandler(async (req, res) => {
+    
     const { query } = req;
     const pageSize = query.pageSize || PAGE_SIZE;
     const page = query.page || 1;
@@ -20,6 +21,7 @@ productRouter.get(
     const rating = query.rating || "";
     const order = query.order || "";
     const searchQuery = query.query || "";
+    console.log(query);
 
     const queryFilter =
       searchQuery && searchQuery != "all"
@@ -64,6 +66,7 @@ productRouter.get(
         ? { createdAt: -1 }
         : { _id: -1 };
 
+        console.log(queryFilter,categoryFilter,priceFilter,ratingFilter);
     const products = await Product.find({
       ...queryFilter,
       ...categoryFilter,
@@ -93,7 +96,7 @@ productRouter.get(
   "/categories",
   expressAsyncHandler(async (req, res) => {
     const categories = await Product.find().distinct("category");
-    console.log(categories);
+    
     res.send(categories);
   })
 );
@@ -114,5 +117,22 @@ productRouter.get("/:id", async (req, res) => {
     res.status(404).send({ message: "Product Not Found" });
   }
 });
-
+{/*
+productRouter.get("/product-photo/:id", async (req, res) => {
+  try{
+    const product = await Product.findById(req.params.id).select("photo");
+  if (product.photo.data) {
+    res.set("Content-Type", product.photo.contentType);
+    return res.status(200).send(product.photo.data);
+  }}
+  catch (error) {
+    console.log(error);
+    res.status(500).send({
+      success:false,
+      message: "error while ",
+      error,
+    })
+  }
+});
+*/}
 export default productRouter;

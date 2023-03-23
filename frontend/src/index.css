@@ -31,7 +31,7 @@ main {
 }
 /* change buttom color */
 .btn-primary, .btn-outline-primary {
-  background-color: orange;
+  background-color: #f08000;
   color: black;
 }
 .rating span {

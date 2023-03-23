@@ -8,9 +8,10 @@ import userRouter from "./routes/userRoutes.js";
 import orderRouter from "./routes/orderRoutes.js";
 
 dotenv.config();
-
+//mongodb+srv://Bloom:Bloom123@cluster0.cayklrm.mongodb.net/?retryWrites=true&w=majority;4
+//mongodb+srv://haider:Furcfurc1.@cluster0.mpdropb.mongodb.net/ecommerce
 mongoose
-  .connect("mongodb+srv://Bloom:Bloom123@cluster0.cayklrm.mongodb.net/?retryWrites=true&w=majority")
+  .connect("mongodb+srv://haider:Furcfurc1.@cluster0.mpdropb.mongodb.net/ecommerce")
   .then(() => {
     console.log("connected to DB");
   })

@@ -46,7 +46,7 @@ userRouter.post(
 );
 
 userRouter.put('/profile', isAuth, expressAsyncHandler(async(req, res)=>{
-  console.log(req.user._id);
+  
   const user = await User.findById(req.user._id);
   if(user){
     user.name = req.body.name || user.name;

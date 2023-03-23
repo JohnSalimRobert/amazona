@@ -83,9 +83,11 @@ export default function SearchScreen() {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `/api/products/search/page=${page}&query=${query}&categories=${category}&price=${price}&rating=${rating}&order=${order}`
+          `/api/products/search?page=${page}&query=${query}&categories=${category}&price=${price}&rating=${rating}&order=${order}`
         );
+        
         dispatch({ type: "FETCH_SUCCESS", payload: data });
+        console.log(data);
       } catch (error) {
         dispatch({
           type: "FETCH_FAIL",
@@ -116,7 +118,10 @@ export default function SearchScreen() {
     const filterRating = filter.rating || rating;
     const filterPrice = filter.price || price;
     const sortOrder = filter.order || order;
-    return `/search?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`;
+   // console.log(category);
+    console.log(filterCategory);
+    return { pathname: "/search",
+              search : `?category=${filterCategory}&query=${filterQuery}&price=${filterPrice}&rating=${filterRating}&order=${sortOrder}&page=${filterPage}`};
   };
 
   return (
@@ -124,9 +129,9 @@ export default function SearchScreen() {
       <Helmet>
         <title>Search Products</title>
       </Helmet>
-      <Row>
-        <Col md={3}>
-          <h3>Department</h3>
+      <Row >
+        <Col md={3} className="bg-light">
+          <h3>Categories</h3>
           <div>
             <ul>
               <li>
@@ -240,7 +245,9 @@ export default function SearchScreen() {
                         <MessageBox>No Product Found</MessageBox>
                     )}
                     <Row>
-                    {products.map((product)=>(
+                    {
+                    
+                    products.map((product)=>(
                         <Col sm={6} lg={4} className='mb-3' key={product._id}>
                             <Product product={product}></Product>
                         </Col>

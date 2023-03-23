@@ -13,6 +13,8 @@ import LoadingBox from '../components/LoadingBox';
 import MessageBox from '../components/MessageBox';
 import { getError } from '../utils';
 import { Store } from '../Store';
+import Comments from '../components/Comments';
+
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -56,6 +58,7 @@ function ProductScreen() {
     const existItem = cart.cartItems.find((x) => x._id === product._id);
     const quantity = existItem ? existItem.quantity + 1 : 1;
     const { data } = await axios.get(`/api/products/${product._id}`);
+    console.log(data);
     if (data.countInStock < quantity) {
       window.alert('Sorry. Product is out of stock');
       return;
@@ -75,7 +78,7 @@ function ProductScreen() {
     <div>
       <Row>
         <Col md={6}>
-          <img className="img-large" src={product.image} alt={product.name} />
+          <img className="img-large" src={`/api/product/product-photo/${product._id}`} alt={product.name} />
         </Col>
         <Col md={3}>
           <ListGroup variant="flush">
@@ -115,7 +118,7 @@ function ProductScreen() {
                       {product.countInStock > 0 ? (
                         <Badge bg="success">In Stock</Badge>
                       ) : (
-                        <Badge bg="danger">Danger</Badge>
+                        <Badge bg="danger">Out of Stock</Badge>
                       )}
                     </Col>
                   </Row>
@@ -132,6 +135,11 @@ function ProductScreen() {
               </ListGroup>
             </Card.Body>
           </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col md={9} className='bg-primary'>
+               <Comments currentUserId='1'/>
         </Col>
       </Row>
     </div>
